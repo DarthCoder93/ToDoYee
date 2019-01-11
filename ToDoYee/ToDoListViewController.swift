@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoListViewController: UITableViewController {
 
-    let itemArray = ["Find Mike" , "Buy Eggos" , "Destroy Demogorgon" ]
+    var itemArray = ["Find Mike" , "Buy Eggos" , "Destroy Demogorgon" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,38 @@ class ToDoListViewController: UITableViewController {
         
         //stop items from stying highlighted
         tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    
+    
+    @IBAction func addButtonClick(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Add New To Do Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default){
+            action in
+            
+            print(alert.textFields?[0].text ?? "No Value")
+            
+        
+            self.itemArray.append(alert.textFields?[0].text ?? "")
+            
+            self.tableView.reloadData()
+            
+            
+        }
+        
+        alert.addTextField{
+            (alertTextView) in
+            alertTextView.placeholder = "Create New Item"
+        }
+        
+        
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
